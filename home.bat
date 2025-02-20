@@ -1,4 +1,4 @@
-: Deepseek To Go  v1.2.0  by 运动鸡
+: Deepseek To Go  v1.1.0  by 运动鸡
 : Please open this file using GB 2312 (ANSI) encoding.
 
 @echo off
@@ -371,26 +371,19 @@ if errorlevel 1 (
 cls
 echo 关于
 echo ------------------------
-echo DeepSeek To Go  v1.2.0
+echo DeepSeek To Go  v1.1.0
 echo 项目作者：运动鸡
 echo 贡献者：Xia Junyi（运行测试，bug反馈）
 echo [Q] q群：1033982052
 echo [A] B站：运动鸡（https://space.bilibili.com/1230630211）
 echo [P] 项目地址：https://github.com/Yundongji/DeepSeek-To-Go
 echo [D] 捐赠：https://afdian.com/a/yundongji
-echo [V] Ollama 版本
 echo [O] 此程序使用的开源项目
 echo [R] README
 echo [L] LICENSE （此项目遵循MIT协议）
 echo [B] 返回主页
 echo ------------------------
-choice /C:BLRODPAQV /N
-if errorlevel 9 (
-    cls
-    ollama -v
-    pause
-    goto :about
-)
+choice /C:BLRODPAQ /N
 if errorlevel 8 (
     start q.jpg
     goto :about
@@ -513,58 +506,18 @@ if not exist "%cd%\models\manifests\registry.ollama.ai\library\deepseek-%model_n
     echo 模型deepseek-%model_name_1%:%model_name_2%尚未安装！
     echo ------------------------
     echo [O] 在线下载
-    echo [M] 手动导入
     echo [B] 返回主页
     echo ------------------------
-    choice /C:OMB /N
-    if errorlevel 3 goto :main
-    if errorlevel 2 goto :manual_import
+    choice /C:OB /N
+    if errorlevel 2 goto :main
 )
 title deepseek-%model_name_1%:%model_name_2%
 cls
-:re_download
 ollama run %ollama_chat_parameter% deepseek-%model_name_1%:%model_name_2%
-if not exist "%cd%\models\manifests\registry.ollama.ai\library\deepseek-%model_name_1%\%model_name_2%" goto :re_download
 goto :main
 
 :manual_import
-cls
-echo 手动导入模型向导
-echo ------------------------
-echo deepseek-%model_name_1%:%model_name_2%是你要手动导入的模型。
-echo ------------------------
-echo 操作方法：将模型文件（gguf格式）复制到“import”文件夹，再按[C]键。
-echo 注意：
-echo 1.仅支持gguf格式模型！
-echo 2.同时只能导入一个模型，否则会造成错误！
-echo 3.请确保模型文件有效，否则即使导入完成也无法启动!
-echo 4.导入完成后，“import”文件夹中的模型将被自动删除！
-echo ------------------------
-echo [C] 导入模型
-echo [B] 返回上一级
-echo ------------------------
-choice /C:CB /N
-if errorlevel 2 goto :text_block_run_models
-if not exist "%cd%\import\*.gguf" (
-    cls
-    echo 导入失败！未将模型文件复制到“import”文件夹或模型文件不是gguf格式！
-    pause
-    goto :manual_import
-)
-ren %cd%\import\*.gguf temp.gguf
-echo FROM %cd%\import\temp.gguf > %cd%\import\Modelfile
-ollama create deepseek-%model_name_1%:%model_name_2% -f %cd%\import\Modelfile
-del /s /q %cd%\import
-if not exist "%cd%\models\manifests\registry.ollama.ai\library\deepseek-%1\%2" (
-    cls
-    echo 导入失败！模型文件无效或同时导入了多个模型！
-    pause
-    goto :manual_import
-)
-cls
-echo 导入完成！即将自动进入聊天界面！
-pause
-goto :text_block_run_models
+
 
 :text_block_uninstall_models
 cls
