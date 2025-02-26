@@ -1,4 +1,4 @@
-: DeekSeek To Go  v1.2.0  by 运动鸡
+: DeekSeek To Go  v1.2.1  by 运动鸡
 : Please open this file using GB 2312 (ANSI) encoding.
 
 @echo off
@@ -23,9 +23,10 @@ echo 首先检查你是否以管理员身份运行了此脚本（此脚本不应以管理员身份运行），
 echo 若没有，请检查UAC配置，具体操作方法：
 echo 按下[Windows+S]调出搜索界面，搜索“UAC”，打开“更改用户账户控制设置”，
 echo 查看弹出窗口中的蓝色手柄，若它在最底端，请将其拉高一档，并点击窗口右下角的“确认”。
-echo 若不在最底端，则可能是其他原因造成的此问题，你可以百度或者直接问我。
+echo 若不在最底端，则可能是其他原因造成的此问题，你可以百度或者打开此文件夹内的“q.jpg”
+echo 扫码进入交流群后咨询。
 echo ------------------------
-echo v1.3.0  by 运动鸡
+echo v1.2.0  by 运动鸡
 start config_server.bat
 cls
 timeout 1

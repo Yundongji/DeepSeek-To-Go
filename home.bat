@@ -1,4 +1,4 @@
-: Deepseek To Go  v1.2.0  by 运动鸡
+: Deepseek To Go  v1.2.1  by 运动鸡
 : Please open this file using GB 2312 (ANSI) encoding.
 
 @echo off
@@ -522,9 +522,24 @@ if not exist "%cd%\models\manifests\registry.ollama.ai\library\deepseek-%model_n
 )
 title deepseek-%model_name_1%:%model_name_2%
 cls
+if exist "%cd%\models\manifests\registry.ollama.ai\library\deepseek-%model_name_1%\%model_name_2%" (
+    ollama run %ollama_chat_parameter% deepseek-%model_name_1%:%model_name_2%
+    goto :main
+)
 :re_download
-ollama run %ollama_chat_parameter% deepseek-%model_name_1%:%model_name_2%
-if not exist "%cd%\models\manifests\registry.ollama.ai\library\deepseek-%model_name_1%\%model_name_2%" goto :re_download
+if not exist "%cd%\models\manifests\registry.ollama.ai\library\deepseek-%model_name_1%\%model_name_2%" (
+    ollama pull deepseek-%model_name_1%:%model_name_2%
+    echo 检测到下载时出现错误，正在尝试恢复……
+    goto :re_download
+)
+cls
+echo 下载完成！要立即开始聊天吗？
+echo ------------------------
+echo [C] 开始聊天
+echo [B] 返回主页
+choice /C:CB /N
+if errorlevel 2 goto :main
+if errorlevel 1 goto :text_block_run_models
 goto :main
 
 :manual_import

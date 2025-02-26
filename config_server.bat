@@ -1,4 +1,4 @@
-: DeekSeek To Go  v1.2.0  by 运动鸡
+: DeekSeek To Go  v1.2.1  by 运动鸡
 : Please open this file using GB 2312 (ANSI) encoding.
 : 如果你不知道下列配置的含义，请勿编辑，请不保存并退出编辑器！
 : 非配置项中的内容可能包含了程序运行的部分代码，请勿随意编辑，以免造成未知错误！
